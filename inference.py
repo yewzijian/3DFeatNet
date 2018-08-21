@@ -19,7 +19,7 @@ from models.net_factory import get_network
 from utils import get_tensors_in_checkpoint_file
 
 # Defaults
-CKPT_PATH = './ckpt/checkpoint.ckpt-232000'
+CKPT_PATH = './ckpt/checkpoint.ckpt'
 MAX_POINTS = 30000
 
 # Arguments

@@ -3,10 +3,10 @@
 This folder contains MATLAB processing scripts to generate the datasets used in 3DFeat-Net paper, in their respective subfolders.
 
 * [Oxford Robotcar](#oxford-robotcar-dataset)
-* [KITTI](kitti-dataset)
-* [ETH](eth-dataset) (Only results are provided, see section for details)
+* [KITTI](#kitti-dataset)
+* [ETH](#eth-dataset) (Only results are provided, see section for details)
 
-Details of the data format can be found in the [last section](#data-format).
+Details of the data format can be found in the [last section](#point-cloud-data-format).
 
 
 

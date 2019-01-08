@@ -1,0 +1,1 @@
+Many of these scripts are obtained from the Oxford Robotcar dataset SDK, with slight modifications for memory efficiency.

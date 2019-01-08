@@ -40,19 +40,6 @@ methods(Static)
         fclose(fid);
     end
     
-    function [split_fnames, split_xyz] = splitTrainTest(filenames, xyz)
-        
-        TRAIN_PROPORTION = 0.9;
-        num_train = floor(size(filenames, 1) * TRAIN_PROPORTION);
-        
-        split_xyz{1} = xyz(1:num_train, :);
-        split_xyz{2} = xyz(num_train+1:end, :);
-        
-        split_fnames{1} = filenames(1:num_train);
-        split_fnames{2} = filenames(num_train+1:end);
-        
-    end
-    
     function data = load_descriptors(fname, m)
                 
         % Arguments

@@ -1,3 +1,5 @@
+*Update (8 Jan): Added the code to generate the Oxford dataset training data. Training code will be uploaded soon.*
+
 # 3DFeat-Net: Weakly Supervised Local 3D Features for Point Cloud Registration
 
 
@@ -41,7 +43,7 @@ Check and execute `tf_xxx_compile.sh` under each subfolder. Update the python an
 
 ### Training
 
-Code to generate the training data, as well as to train the network will be uploaded at a later date.
+Code to train the network will be uploaded soon.
 
 ### Inference on Example data
 

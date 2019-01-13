@@ -329,12 +329,16 @@ class Feat3dNet:
             best_negative = tf.reduce_min(negative_dist, axis=2)
 
         with tf.variable_scope("triplet_loss") as sc:
-            attention_sm = anchor_attention / tf.reduce_sum(anchor_attention, axis=1)[:, None]
-            sum_positive = tf.reduce_sum(attention_sm * best_positive, 1)
-            sum_negative = tf.reduce_sum(attention_sm * best_negative, 1)
+            if not self.param['Attention']:
+                sum_positive = tf.reduce_mean(best_positive, 1)
+                sum_negative = tf.reduce_mean(best_negative, 1)
+            else:
+                attention_sm = anchor_attention / tf.reduce_sum(anchor_attention, axis=1)[:, None]
+                sum_positive = tf.reduce_sum(attention_sm * best_positive, 1)
+                sum_negative = tf.reduce_sum(attention_sm * best_negative, 1)
 
-            tf.summary.histogram('normalized_attention', attention_sm)
-            end_points['normalized_attention'] = attention_sm
+                tf.summary.histogram('normalized_attention', attention_sm)
+                end_points['normalized_attention'] = attention_sm
 
             end_points['sum_positive'] = sum_positive
             end_points['sum_negative'] = sum_negative

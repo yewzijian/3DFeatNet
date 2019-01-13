@@ -1,5 +1,3 @@
-*Update (8 Jan): Added the code to generate the Oxford dataset training data. Training code will be uploaded soon.*
-
 # 3DFeat-Net: Weakly Supervised Local 3D Features for Point Cloud Registration
 
 
@@ -43,7 +41,17 @@ Check and execute `tf_xxx_compile.sh` under each subfolder. Update the python an
 
 ### Training
 
-Code to train the network will be uploaded soon.
+#### Preparation of data
+
+1. Follow instructions [here](scripts_data_processing/Readme.md#training-data) to download and prepare the training data
+2. Also download the test data for descriptor matching (i.e. the 30,000 cluster pairs) by following the instructions [here](scripts_data_processing/Readme.md#test-data). We monitor the false alarm rate at 95% recall, as the training loss is not very informative (The provided script evaluates on all of the test data which can be slow; you can change this behavior by modifying VAL_PROPORTION in train.py)
+3. Both the training and test sets should be placed in the same folder. The provided scripts assume they're placed in `../data/oxford`, which should contain two subfolders: `clusters` and `train`.
+
+#### Training
+
+Training is divided into 2 stages, where the first stage only trains the descriptor subnetwork without rotation and attention. For convenience, we provide a training script which runs both parts. Simply execute`./train.sh` (you can configure the top few lines to select the GPU, etc).
+
+Training takes around 1-1.5 days to saturate. During training, progress can be monitored by running `tensorboard --logdir=./ckpt` from the root folder, and the false alarm rate will be shown in the fp_rate graph.
 
 ### Inference on Example data
 
@@ -56,4 +64,4 @@ It should be straightforward to run on your own data, just make sure the data is
 * The network considers up to 64 points per cluster. For dense point clouds, it will pick the points randomly (as long the flag `--randomize_points` is set which will randomize the input point ordering). This means that the performance may differ slightly with each run.
 
 ## Datasets
-Refer to `scripts_data_processing/Readme.md` .
+Refer to [scripts_data_processing/Readme.md](scripts_data_processing/Readme.md).

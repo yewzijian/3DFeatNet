@@ -11,14 +11,12 @@ class DataGenerator(object):
         """ Constructor to data generator
 
         Args:
-            filename: Path to dataset
             num_cols (int): Number of columns in binary file
         """
 
-        self.dataset = os.path.split(os.path.split(filename)[0])[1]
-
         self.logger = logging.getLogger(self.__class__.__name__)
 
+        self.dataset_folder = os.path.split(filename)[0]
         self.paths_and_labels = []
         self.load_metadata(filename)
         self.logger.info('Loaded metadata file')
@@ -82,9 +80,9 @@ class DataGenerator(object):
             negative = self.process_point_cloud(negative, num_points=num_points)
 
             for a in augmentation:
-                anchor[:, :3], _ = a.apply(anchor[:, :3])
-                positive[:, :3], _ = a.apply(positive[:, :3])
-                negative[:, :3], _ = a.apply(negative[:, :3])
+                anchor[:, :3] = a.apply(anchor[:, :3])
+                positive[:, :3] = a.apply(positive[:, :3])
+                negative[:, :3] = a.apply(negative[:, :3])
 
             anchors.append(anchor)
             positives.append(positive)
@@ -110,7 +108,8 @@ class DataGenerator(object):
         """
         assert(0 <= i < len(self.data))
 
-        cloud = DataGenerator.load_point_cloud(self.paths_and_labels[i][0], num_cols=self.num_cols)
+        cloud = DataGenerator.load_point_cloud(os.path.join(self.dataset_folder, self.paths_and_labels[i][0]),
+                                               num_cols=self.num_cols)
         return cloud
 
     def get_positive_negative(self, anchor):

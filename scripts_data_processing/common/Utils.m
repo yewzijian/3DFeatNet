@@ -5,7 +5,7 @@ methods(Static)
         % Read point cloud .bin files
         %
         % Arguments
-        %   m Number of dimensions for each point (Default:4)
+        %   m Number of dimensions for each point (Default:6)
         %
         % Returns
         %   data  [nxm] matrix representing the points. The first 3 columns 
@@ -14,29 +14,22 @@ methods(Static)
         %   
         
         if nargin == 1
-            m = 4;
+            m = 6;
         end
 
         finfo = dir(fname);
         fsize = finfo.bytes;
         fid = fopen(fname);
 
-        numPts = fsize / (4*m);
+        numPts = fsize / (6*m);
         data = fread(fid, [m, numPts], 'float')';
     end
     
-    function savePointCloud(cloud, fname)
-        xyz = cloud.Location;
-        intensity = cloud.Intensity;
-        
-        if isempty(intensity)
-            intensity = zeros(size(xyz,1), 1);
-        end
-        
-        xyzi = horzcat(xyz, intensity);
+    function savePointCloud(cloud, fname)        
+        xyz_normals = horzcat(cloud.Location, cloud.Normal);
         
         fid = fopen(fname, 'w');
-        fwrite(fid, xyzi', 'float');
+        fwrite(fid, xyz_normals', 'float');
         fclose(fid);
     end
     

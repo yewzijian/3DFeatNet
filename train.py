@@ -18,8 +18,8 @@ VAL_PROPORTION = 1.0
 
 # Arguments
 parser = argparse.ArgumentParser(description='Trains pointnet')
-parser.add_argument('--gpu', type=int, default=1,
-                    help='GPU to use (default: 1)')
+parser.add_argument('--gpu', type=int, default=0,
+                    help='GPU to use (default: 0)')
 # data
 parser.add_argument('--data_dim', type=int, default=6,
                     help='Input dimension for data. Note: Feat3D-Net will only use the first 3 dimensions (default: 6)')

@@ -2,7 +2,7 @@
 
 DATASET_DIR=../data/oxford
 LOG_DIR=./ckpt
-GPU_ID=2
+GPU_ID=0
 
 # Pretrain
 python train.py \

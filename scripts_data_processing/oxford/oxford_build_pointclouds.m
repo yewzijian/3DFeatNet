@@ -37,7 +37,7 @@ datasets = datasets.Var1;
 
 
 totalClouds = 0;
-for d = 2 : length(datasets)
+for d = 1 : length(datasets)
 
     if ~exist(fullfile(FOLDER, datasets{d}), 'dir')
         continue

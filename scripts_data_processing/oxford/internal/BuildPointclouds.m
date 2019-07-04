@@ -92,7 +92,7 @@ while true
             BuildSinglePointCloud(laser_dir, ...
                              laser_timestamps(startIdx:endIdx,:), ...
                              ins_poses_w_offset(startIdx:endIdx,:), G_ins_laser);
-        pcloud = pointCloud(pcloud', 'Intensity', reflectance);
+        pcloud = pointCloud(pcloud', 'Intensity', reflectance');
 
         % Processes (crops and centers) the point cloud
         [pcloud, transform] = processPointCloud(pcloud, false);
